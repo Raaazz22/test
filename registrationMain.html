@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WorkOrbit Registration</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #5585b5, #53a8b6);
+        padding: 20px;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        max-width: 900px;
+        width: 100%;
+        text-align: center;
+        backdrop-filter: blur(8px);
+        transform: translateY(0);
+        transition: all 0.3s ease;
+      }
+
+      .container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .logo {
+        margin-bottom: 30px;
+      }
+
+      .logo img {
+        max-width: 200px;
+        height: auto;
+        border-radius: 15px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .logo img:hover {
+        transform: scale(1.05);
+      }
+
+      h1 {
+        color: #5585b5;
+        font-size: 36px;
+        margin-bottom: 40px;
+        font-weight: 600;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .option-boxes {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin: 40px 0;
+      }
+
+      .option-box {
+        flex: 1;
+        max-width: 300px;
+        background: linear-gradient(135deg, #53a8b6, #5585b5);
+        color: #fff;
+        padding: 30px 25px;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .option-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #5585b5, #53a8b6);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .option-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .option-box:hover::before {
+        opacity: 1;
+      }
+
+      .option-box {
+        font-size: 18px;
+        font-weight: 500;
+        position: relative;
+        z-index: 1;
+      }
+
+      .login-link {
+        margin-top: 40px;
+        font-size: 16px;
+        color: #333;
+      }
+
+      .login-link a {
+        color: #53a8b6;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .login-link a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #5585b5;
+        transition: width 0.3s ease;
+      }
+
+      .login-link a:hover {
+        color: #5585b5;
+      }
+
+      .login-link a:hover::after {
+        width: 100%;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 30px 20px;
+        }
+
+        h1 {
+          font-size: 28px;
+          margin-bottom: 30px;
+        }
+
+        .option-boxes {
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+        }
+
+        .option-box {
+          width: 100%;
+          max-width: none;
+        }
+
+        .logo img {
+          max-width: 150px;
+        }
+      }
+
+      /* Add animation for page load */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .container {
+        animation: fadeIn 0.8s ease-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <img src="Images/ORBIT__1_-removebg-preview.png" alt="WorkOrbit Logo" />
+      </div>
+      <h1>WorkOrbit Registration</h1>
+      <div class="option-boxes">
+        <div
+          class="option-box"
+          onclick="location.href='register-employer.html'"
+        >
+          Register as Employer
+        </div>
+        <div
+          class="option-box"
+          onclick="location.href='register-jobseeker.html'"
+        >
+          Register as Job Seeker
+        </div>
+      </div>
+      <div class="login-link">
+        Already have an account? <a href="login.html">Login here</a>
+      </div>
+    </div>
+  </body>
+</html>

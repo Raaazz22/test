@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WorkOrbit - Login</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #5585b5, #53a8b6);
+        padding: 20px;
+      }
+
+      .container {
+        display: flex;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        max-width: 900px;
+        width: 100%;
+        backdrop-filter: blur(8px);
+        overflow: hidden;
+        transform: translateY(0);
+        transition: all 0.3s ease;
+      }
+
+      .container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .left-section {
+        flex: 1;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: linear-gradient(135deg, #bbe4e9, #79c2d0);
+      }
+
+      .logo {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .logo img {
+        max-width: 180px;
+        height: auto;
+        border-radius: 15px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .logo img:hover {
+        transform: scale(1.05);
+      }
+
+      .wrapper {
+        flex: 1;
+        padding: 40px;
+        background: #fff;
+      }
+
+      .wrapper h1 {
+        text-align: center;
+        font-size: 32px;
+        color: #5585b5;
+        margin-bottom: 30px;
+        font-weight: 600;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .input-box {
+        position: relative;
+        margin-bottom: 25px;
+      }
+
+      .input-box input {
+        width: 100%;
+        padding: 15px 45px 15px 20px;
+        border-radius: 12px;
+        border: 2px solid #e0e0e0;
+        background: rgba(187, 228, 233, 0.2);
+        outline: none;
+        font-size: 16px;
+        color: #333;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      .input-box label {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 16px;
+        color: #666;
+        pointer-events: none;
+        transition: all 0.3s ease;
+      }
+
+      .input-box input:focus ~ label,
+      .input-box input:valid ~ label {
+        top: -10px;
+        left: 15px;
+        font-size: 14px;
+        color: #53a8b6;
+        background-color: white;
+        padding: 0 5px;
+      }
+
+      .input-box input:focus {
+        border-color: #53a8b6;
+        background: rgba(187, 228, 233, 0.4);
+        box-shadow: 0 0 8px rgba(83, 168, 182, 0.3);
+      }
+
+      .input-box input:hover {
+        background: rgba(187, 228, 233, 0.3);
+        border-color: #53a8b6;
+      }
+
+      .input-box i {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #5585b5;
+        font-size: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .input-box input:focus + i {
+        color: #53a8b6;
+      }
+
+      /* Add floating label animation */
+      @keyframes floatLabel {
+        from {
+          opacity: 0;
+          transform: translateY(0);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(-100%);
+        }
+      }
+
+      .input-box input:focus ~ label {
+        animation: floatLabel 0.3s ease forwards;
+      }
+
+      /* Add typing indicator */
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .input-box input:focus::after {
+        content: '|';
+        margin-left: 2px;
+        animation: blink 1s infinite;
+      }
+
+      /* Error state styling */
+      .input-box.error input {
+        border-color: #ff3e3e;
+        background: rgba(255, 62, 62, 0.1);
+      }
+
+      .input-box.error i {
+        color: #ff3e3e;
+      }
+
+      /* Success state styling */
+      .input-box.success input {
+        border-color: #28a745;
+        background: rgba(40, 167, 69, 0.1);
+      }
+
+      .input-box.success i {
+        color: #28a745;
+      }
+
+      /* Password strength indicator */
+      .password-strength {
+        height: 3px;
+        background: #e0e0e0;
+        margin-top: 5px;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+      }
+
+      .password-strength.weak {
+        background: #ff3e3e;
+        width: 30%;
+      }
+
+      .password-strength.medium {
+        background: #ffa500;
+        width: 60%;
+      }
+
+      .password-strength.strong {
+        background: #28a745;
+        width: 100%;
+      }
+
+      /* Mobile optimization */
+      @media (max-width: 768px) {
+        .input-box input {
+          padding: 12px 40px 12px 15px;
+          font-size: 15px;
+        }
+        
+        .input-box i {
+          right: 15px;
+          font-size: 18px;
+        }
+        
+        .input-box label {
+          font-size: 15px;
+        }
+      }
+
+      /* Add glass morphism effect */
+      .input-box input {
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+      }
+
+      /* Add focus highlight animation */
+      @keyframes focusHighlight {
+        0% {
+          box-shadow: 0 0 0 0 rgba(83, 168, 182, 0.4);
+        }
+        100% {
+          box-shadow: 0 0 0 4px rgba(83, 168, 182, 0);
+        }
+      }
+
+      .input-box input:focus {
+        animation: focusHighlight 0.6s ease-out;
+      }
+
+      .remember-forgot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+
+      .remember-forgot label {
+        display: flex;
+        align-items: center;
+        color: #666;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .remember-forgot input[type="checkbox"] {
+        margin-right: 8px;
+        accent-color: #53a8b6;
+        width: 16px;
+        height: 16px;
+      }
+
+      .remember-forgot a {
+        color: #53a8b6;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s ease;
+      }
+
+      .remember-forgot a:hover {
+        color: #5585b5;
+        text-decoration: underline;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #53a8b6, #5585b5);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn:hover {
+        background: linear-gradient(135deg, #5585b5, #53a8b6);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .register-link {
+        text-align: center;
+        margin-top: 25px;
+        color: #666;
+        font-size: 15px;
+      }
+
+      .register-link a {
+        color: #53a8b6;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .register-link a:hover {
+        color: #5585b5;
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+
+        .left-section {
+          padding: 30px;
+        }
+
+        .wrapper {
+          padding: 30px;
+        }
+
+        .wrapper h1 {
+          font-size: 28px;
+        }
+
+        .logo img {
+          max-width: 150px;
+        }
+      }
+
+      /* Add animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .container {
+        animation: fadeIn 0.8s ease-out;
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        75% {
+          transform: translateX(5px);
+        }
+      }
+
+      .input-box.error input {
+        border-color: #ff3e3e;
+        animation: shake 0.3s ease-in-out;
+      }
+
+      .select-box {
+        position: relative;
+        margin-bottom: 25px;
+      }
+
+      .select-box select {
+        width: 100%;
+        padding: 15px 20px;
+        border-radius: 12px;
+        border: 2px solid #e0e0e0;
+        background: rgba(187, 228, 233, 0.2);
+        outline: none;
+        font-size: 16px;
+        color: #333;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+      }
+
+      .select-box::after {
+        content: '';
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 12px;
+        height: 12px;
+        border-right: 2px solid #5585b5;
+        border-bottom: 2px solid #5585b5;
+        transform: translateY(-50%) rotate(45deg);
+        transition: transform 0.3s ease;
+        pointer-events: none;
+      }
+
+      .select-box select:focus {
+        border-color: #53a8b6;
+        background: rgba(187, 228, 233, 0.4);
+        box-shadow: 0 0 8px rgba(83, 168, 182, 0.3);
+      }
+
+      .select-box select:hover {
+        background: rgba(187, 228, 233, 0.3);
+        border-color: #53a8b6;
+      }
+
+      .select-box select option {
+        padding: 15px;
+        background-color: white;
+        color: #333;
+        font-size: 16px;
+        border: none;
+      }
+
+      .select-box select option:hover,
+      .select-box select option:focus {
+        background-color: #f0f8ff;
+        color: #5585b5;
+      }
+
+      .select-box select:focus + ::after {
+        transform: translateY(-50%) rotate(225deg);
+      }
+
+      /* Custom styling for the placeholder option */
+      .select-box select option[value=""] {
+        color: #888;
+      }
+
+      /* Animation for dropdown */
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .select-box select:focus option {
+        animation: slideIn 0.2s ease;
+      }
+
+      /* Style for disabled state */
+      .select-box select:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
+      /* Mobile optimization */
+      @media (max-width: 768px) {
+        .select-box select {
+          padding: 12px 20px;
+          font-size: 15px;
+        }
+        
+        .select-box::after {
+          right: 15px;
+          width: 10px;
+          height: 10px;
+        }
+      }
+
+      /* Add a subtle gradient background on hover */
+      .select-box select:hover {
+        background: linear-gradient(
+          to bottom,
+          rgba(187, 228, 233, 0.2),
+          rgba(187, 228, 233, 0.4)
+        );
+      }
+
+      /* Add focus ring animation */
+      @keyframes focusRing {
+        0% {
+          box-shadow: 0 0 0 0 rgba(83, 168, 182, 0.4);
+        }
+        100% {
+          box-shadow: 0 0 0 4px rgba(83, 168, 182, 0);
+        }
+      }
+
+      .select-box select:focus {
+        animation: focusRing 0.6s ease-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-section">
+        <div class="logo">
+          <img src="Images/ORBIT__1_-removebg-preview.png" alt="Logo" />
+        </div>
+      </div>
+      <div class="wrapper">
+        <form id="loginform" method="POST">
+          <h1>WorkOrbit</h1>
+          <!-- Validation message -->
+          <h5 style="color: red; text-align: center" id="validationresult"></h5>
+          <div class="input-box">
+            <input
+              type="text"
+              placeholder="Username"
+              id="username"
+              name="username"
+              required
+            />
+            <i class="fa fa-user"></i>
+          </div>
+          <div class="input-box">
+            <input
+              type="password"
+              placeholder="Password"
+              id="password"
+              name="password"
+              required
+            />
+            <i class="fa fa-lock"></i>
+          </div>
+          <div class="select-box">
+            <select id="usertype" name="usertype" required>
+              <option value="" disabled selected>Select User Type</option>
+              <option value="Job Seeker">Job Seeker</option>
+              <option value="Employer">Employer</option>
+              <option value="Admin">Admin</option>
+            </select>
+          </div>
+          <div class="remember-forgot">
+            <label><input type="checkbox" /> Remember Me</label>
+            <a href="#">Forgot Password?</a>
+          </div>
+          <button type="submit" class="btn">Login</button>
+          <div class="register-link">
+            <p>Don't have an account? <a href="#">Register</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

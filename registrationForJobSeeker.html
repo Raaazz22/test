@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WorkOrbit Job Seeker Registration</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #5585b5, #53a8b6);
+        padding: 20px;
+      }
+
+      .container {
+        display: flex;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        max-width: 1000px;
+        width: 100%;
+        backdrop-filter: blur(8px);
+        transform: translateY(0);
+        transition: all 0.3s ease;
+      }
+
+      .container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .logo {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+      }
+
+      .logo img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .logo img:hover {
+        transform: scale(1.02);
+      }
+
+      .wrapper {
+        flex: 1.5;
+        padding: 30px;
+      }
+
+      .wrapper h1 {
+        text-align: center;
+        font-size: 32px;
+        color: #5585b5;
+        margin-bottom: 30px;
+        font-weight: 600;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .input-box {
+        flex: 1;
+        position: relative;
+        margin-bottom: 20px;
+        background: #ffffff;
+        padding: 8px;
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .input-box:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(83, 168, 182, 0.15);
+      }
+
+      .input-box label {
+        position: absolute;
+        left: 15px;
+        top: -10px;
+        background: white;
+        padding: 0 8px;
+        font-size: 13px;
+        color: #5585b5;
+        font-weight: 600;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .input-box input,
+      .input-box select {
+        width: 100%;
+        padding: 15px 20px;
+        border: 2px solid #e8f0fe;
+        border-radius: 12px;
+        font-size: 15px;
+        color: #333;
+        background: rgba(238, 241, 246, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .input-box input:focus,
+      .input-box select:focus {
+        border-color: #53a8b6;
+        box-shadow: 0 0 0 4px rgba(83, 168, 182, 0.1);
+        outline: none;
+      }
+
+      .input-box input::placeholder {
+        color: #a0aec0;
+        font-size: 14px;
+      }
+
+      /* Special styling for file input */
+      .input-box input[type="file"] {
+        padding: 12px;
+        background: linear-gradient(to right, rgba(83, 168, 182, 0.05), rgba(85, 133, 181, 0.05));
+        border: 2px dashed #b0c4de;
+        cursor: pointer;
+      }
+
+      .input-box input[type="file"]:hover {
+        background: linear-gradient(to right, rgba(83, 168, 182, 0.1), rgba(85, 133, 181, 0.1));
+        border-color: #53a8b6;
+      }
+
+      /* Add animation for focus state */
+      .input-box input:focus + label {
+        color: #5585b5;
+        transform: translateY(-2px);
+        font-weight: 600;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Add validation styles */
+      .input-box input:valid {
+        border-color: #e8f0fe;
+        background: rgba(238, 241, 246, 0.3);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .input-box input:invalid:not(:placeholder-shown) {
+        border-color: #e8f0fe;
+        background: rgba(238, 241, 246, 0.3);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      /* Add hover effects to match other elements */
+      .input-box input:valid:hover,
+      .input-box input:invalid:hover {
+        border-color: #53a8b6;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(83, 168, 182, 0.15);
+      }
+
+      .btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #53a8b6, #5585b5);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+      }
+
+      .btn:hover {
+        background: linear-gradient(135deg, #5585b5, #53a8b6);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .register-link {
+        text-align: center;
+        margin-top: 25px;
+        color: #333;
+        font-size: 15px;
+      }
+
+      .register-link a {
+        color: #53a8b6;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .register-link a:hover {
+        color: #5585b5;
+        text-decoration: underline;
+      }
+
+      /* Custom styling for skills input */
+      #skills {
+        height: auto;
+        min-height: 45px;
+      }
+
+      /* Custom styling for education input */
+      #higherEducation {
+        height: auto;
+        min-height: 45px;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+          padding: 25px;
+        }
+
+        .logo {
+          margin-bottom: 20px;
+        }
+
+        .wrapper {
+          padding: 20px 0;
+        }
+
+        .row {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .wrapper h1 {
+          font-size: 24px;
+        }
+      }
+
+      /* Add animation for form submission */
+      @keyframes submitPulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(0.98);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .btn:active {
+        animation: submitPulse 0.3s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <img src="Images/ORBIT__1_-removebg-preview.png" alt="WorkOrbit Logo" />
+      </div>
+      <div class="wrapper">
+        <h1>WorkOrbit Job Seeker Registration</h1>
+        <form id="registrationForm" onsubmit="return validateForm()">
+          <div class="row">
+            <div class="input-box">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter your username"
+              />
+            </div>
+            <div class="input-box">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-box">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+              />
+            </div>
+            <div class="input-box">
+              <label for="contactNumber">Contact Number</label>
+              <input
+                type="text"
+                id="contactNumber"
+                name="contactNumber"
+                placeholder="Enter your contact number"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-box">
+              <label for="fullName">Full Name</label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                placeholder="Enter your full name"
+              />
+            </div>
+            <div class="input-box">
+              <label for="profilePic">Profile Picture</label>
+              <input type="file" id="profilePic" name="profilePic" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-box">
+              <label for="higherEducation">Higher Education</label>
+              <input
+                type="text"
+                id="higherEducation"
+                name="higherEducation"
+                placeholder="Enter your higher education"
+              />
+            </div>
+            <div class="input-box">
+              <label for="skills">Skills</label>
+              <input
+                type="text"
+                id="skills"
+                name="skills"
+                placeholder="Enter your skills"
+              />
+            </div>
+          </div>
+          <button type="submit" class="btn">Create Account</button>
+        </form>
+        <div class="register-link">
+          <p>Already have an account? <a href="#">Login</a></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function validateForm() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const email = document.getElementById("email").value;
+        const contactNumber = document.getElementById("contactNumber").value;
+        const fullName = document.getElementById("fullName").value;
+        const higherEducation =
+          document.getElementById("higherEducation").value;
+        const skills = document.getElementById("skills").value;
+
+        if (
+          !username ||
+          !password ||
+          !email ||
+          !contactNumber ||
+          !fullName ||
+          !higherEducation ||
+          !skills
+        ) {
+          alert("All fields are required!");
+          return false;
+        }
+
+        return true;
+      }
+    </script>
+  </body>
+</html>
